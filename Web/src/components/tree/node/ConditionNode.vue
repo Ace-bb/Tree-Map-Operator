@@ -1,0 +1,122 @@
+<template>
+    <div class="emergency-node" >
+        <div class="node-title">{{ itemData.id }}</div>
+        <div v-if="isEdit">
+            <el-input  @focus="nodeFocus" @blur="nodeBlur"
+                type="textarea"
+                :autosize="{ minRows: 2, maxRows: 6}"
+                v-model="itemData.nodeData.Name"
+                autocomplete="off"
+            ></el-input>
+        </div>
+        <div v-else @mouseover="isEdit=true">
+            <div class="content close" ref="content" v-html="itemData.nodeData.Name"></div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { ButterflyVueEndpoint } from 'butterfly-vue';
+export default {
+    name: "emergency-node",
+    components: {
+        ButterflyVueEndpoint
+    },
+    props: {
+        itemData: {
+            type: Object, // ${itemData.nodeData.width}
+        },
+        canvasNode: {
+            type: Object
+        }
+    },
+    data(){
+        return {
+            isEdit: true,
+            expande: false,
+            needShowExpande: false,
+        }
+    },
+    methods: {
+        handleClick() {
+            console.log(this.itemData);
+            console.log(this.canvasNode)
+        },
+        nodeFocus(){
+            console.log("nodeFocus")
+            this.isEdit=true
+        },
+        nodeBlur(){
+            this.isEdit=false
+        },
+        expandeClick() {
+            this.expande = !this.expande
+        },
+        summaryHeight(){
+            this.$nextTick(() => {
+                let lineHeight = 22
+                if (this.$refs.content.offsetHeight > lineHeight * 3) {
+                    this.expande = false
+                    this.needShowExpande = true
+                } else {
+                    this.expande = true
+                }
+            })
+        }
+    },
+    created() {
+        // console.log(this)
+    }
+};
+</script>
+
+<style scoped lang="less">
+.emergency-node {
+    width: 200px;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    text-align: center;
+    background-color: rgba(242, 207, 141, 0.615);
+    font-size: 16px;
+    position: relative;
+    .endpoint{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+    .node-title{
+        position: relative;
+        z-index: 2;
+    }
+    .input-area{
+        position: relative;
+        z-index: 1;
+    }
+}
+.content {
+    font-size: 14px;
+    color: black;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-align: justify;
+    overflow: hidden;
+    /* display: -webkit-box; */
+    /* -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; */
+    /* text-overflow: ellipsis; */
+}
+
+.close {
+    word-break: break-all;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /*overflow: hidden;
+    height: 66px;
+    padding-bottom: 0;*/
+}
+
+</style>
