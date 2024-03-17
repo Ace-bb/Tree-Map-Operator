@@ -1,7 +1,9 @@
 <h2 align="center">一个基于Butterfly-vue的决策树编辑器</h2>
 
 ## 页面展示
-网页端在Web目录下
+<p align="center">
+  <img width="900" src="static/web-home.png">
+</p>
 
 ## 安装
 ### Vue安装
