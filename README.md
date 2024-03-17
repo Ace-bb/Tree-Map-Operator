@@ -1,5 +1,11 @@
 <h2 align="center">一个基于Butterfly-vue的决策树编辑器</h2>
 
+一个简易的树形图谱编辑工具，使用butterfly-vue组件完成图谱的展示，支持对图谱节点的增删改查功能。
+目前的功能：
+1. 节点和连接线的增删改查
+2. 新建文件以及保存文件
+
+
 ## 页面展示
 <p align="center">
   <img width="900" src="static/web-home.png">
